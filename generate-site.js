@@ -370,7 +370,8 @@ function main() {
         const variants = p.variants || [];
         const minPrice = variants.length ? Math.min(...variants.map(v => v.price)) : 0;
         const tags = (p.tags || '').split(',').map(t => t.trim()).filter(Boolean);
-        const tagLabel = tags[0] || '';
+        const cleanTag = t => t.replace(/b[12]#[0-9a-fA-F]{3,6}/g, '').replace(/#[0-9a-fA-F]{3,6}$/g, '').replace(/\s+/g, ' ').trim();
+        const tagLabel = cleanTag(tags[0] || '');
 
         return `
         <a class="product-card animate" href="${siteUrl}/product?id=${p.id}" target="_blank" rel="noopener"
