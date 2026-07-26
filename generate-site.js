@@ -475,7 +475,7 @@ function main() {
 <header class="header">
     <div class="header-inner">
         <div class="logo-area">
-            <img src="${esc(fixImg(meta.siteLogo || '', siteUrl))}" alt="${esc(siteName)}" style="width:40px;height:40px;border-radius:10px;object-fit:cover;border:1px solid var(--border-light);">
+            <img src="${esc(fixImg(meta.siteLogo || '', siteUrl))}" alt="${esc(siteName)}" style="height:40px;max-width:120px;border-radius:8px;object-fit:contain;background:var(--card);padding:2px;">
             <div class="logo-text">${esc(siteName)}</div>
         </div>
         <div class="header-badge">🔒 自动发货 · 安全可靠</div>
