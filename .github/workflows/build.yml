@@ -28,11 +28,12 @@ jobs:
           chmod +x build.sh
           bash build.sh
 
-      - name: Commit dist to main
+      - name: Commit to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          cp -r dist/* .
+          cp dist/index.html ./index.html
+          rm -rf dist data
           git add -A
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "chore: auto rebuild $(date -u '+%Y-%m-%d %H:%M')"
