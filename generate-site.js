@@ -24,10 +24,19 @@ function fixImg(url, base) {
     return url;
 }
 
-// ── 全站 SEO 关键词 ──
-const SEO_KEYWORDS = 'Gmail账号,Google Voice,GV靓号,苹果Apple ID,AppStore账号,Telegram账号,发卡网搭建,图床搭建服务,谷歌账号出售,Gmail邮箱,Google Voice靓号';
-const SEO_DESC = '提供优质Google谷歌账号、Gmail邮箱账号、Google Voice谷歌语音电话号(GV)靓号、苹果Apple ID、AppStore账号及Telegram账号出售，同时提供发卡网搭建、图床搭建、域名邮箱部署等服务，一站式解决账号与网站需求，稳定可靠，自动发货，支持长期使用。';
-const SITE_TITLE = '精选账号商城';
+// ── SEO 配置（从 seo.json 读取）──
+const SEO = loadJSON('seo.json') || {};
+const SEO_KEYWORDS = SEO.keywords || '';
+const SEO_DESC = SEO.description || '';
+const SITE_TITLE = SEO.title || '精选账号商城';
+const SEO_TITLE_SUFFIX = SEO.titleSuffix || '';
+const SEO_AUTHOR = SEO.author || SITE_TITLE;
+const SEO_ROBOTS = SEO.robots || 'index, follow';
+const SEO_CANONICAL = SEO.canonical || '';
+const SEO_OG = SEO.og || {};
+const SEO_TWITTER = SEO.twitter || {};
+const SEO_JSON_LD = SEO.jsonLd || {};
+const SEO_FAVICON = SEO.favicon || '';
 
 // ── CSS: 轻奢风格 ──
 const CSS = `
@@ -450,35 +459,35 @@ function main() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Meta -->
-    <title>${esc(siteName)} - Gmail账号 | Google Voice(GV)靓号 | 苹果Apple ID | Telegram账号</title>
+    <title>${esc(siteName)}${SEO_TITLE_SUFFIX ? ' - ' + esc(SEO_TITLE_SUFFIX) : ''}</title>
     <meta name="description" content="${esc(SEO_DESC)}">
     <meta name="keywords" content="${esc(SEO_KEYWORDS)}">
-    <meta name="author" content="${esc(siteName)}">
-    <meta name="robots" content="index, follow">
-    <meta name="googlebot" content="index, follow">
-    <link rel="canonical" href="${GITHUB_PAGES_URL}">
+    <meta name="author" content="${esc(SEO_AUTHOR)}">
+    <meta name="robots" content="${esc(SEO_ROBOTS)}">
+    <meta name="googlebot" content="${esc(SEO_ROBOTS)}">
+    ${SEO_CANONICAL ? `<link rel="canonical" href="${esc(SEO_CANONICAL)}">` : ''}
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="${GITHUB_PAGES_URL}">
+    <meta property="og:type" content="${esc(SEO_OG.type || 'website')}">
+    <meta property="og:url" content="${esc(SEO_OG.url || GITHUB_PAGES_URL)}">
     <meta property="og:title" content="${esc(siteName)}">
     <meta property="og:description" content="${esc(SEO_DESC)}">
     ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">` : ''}
-    <meta property="og:locale" content="zh_CN">
-    <meta property="og:site_name" content="${esc(siteName)}">
+    <meta property="og:locale" content="${esc(SEO_OG.locale || 'zh_CN')}">
+    <meta property="og:site_name" content="${esc(SEO_OG.siteName || siteName)}">
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="${esc(SEO_TWITTER.card || 'summary_large_image')}">
     <meta name="twitter:title" content="${esc(siteName)}">
     <meta name="twitter:description" content="${esc(SEO_DESC)}">
     ${ogImage ? `<meta name="twitter:image" content="${esc(ogImage)}">` : ''}
 
     <!-- Structured Data -->
-    <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+    <script type="application/ld+json">${JSON.stringify({...SEO_JSON_LD, ...jsonLd})}</script>
     <script type="application/ld+json">${JSON.stringify(itemListLd)}</script>
 
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+    ${SEO_FAVICON ? `<link rel="icon" href="${esc(SEO_FAVICON)}">` : ''}
 
     <style>${CSS}</style>
 </head>
