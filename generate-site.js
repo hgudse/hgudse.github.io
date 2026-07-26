@@ -552,9 +552,10 @@ function main() {
     <div class="container">
         <div class="footer-divider"></div>
         <p style="margin-bottom:8px">© ${new Date().getFullYear()} ${esc(siteName)} · 所有商品均为虚拟数字商品</p>
-        <p>
+        <p style="margin-bottom:8px">
             <a href="${siteUrl}" target="_blank" rel="noopener">进入商城</a>
         </p>
+        <p style="color:var(--text-muted);font-size:.75rem;">商城原址：<a href="${siteUrl}" target="_blank" rel="noopener">${esc(siteUrl)}</a></p>
     </div>
 </footer>
 
