@@ -485,10 +485,10 @@ function main() {
 <header class="header">
     <div class="header-inner">
         <div class="logo-area">
-            <img src="${esc(fixImg(meta.siteLogo || '', siteUrl))}" alt="${esc(siteName)}" style="height:40px;max-width:120px;border-radius:8px;object-fit:contain;">
+            <img src="${esc(fixImg(meta.siteLogo || '', siteUrl))}" alt="${esc(siteName)}" style="height:40px;max-width:120px;">
             <div>
                 <div class="logo-text">${esc(siteName)}</div>
-                <div style="font-size:.68rem;color:var(--text3);margin-top:2px;">商城原址：<a href="${siteUrl}" target="_blank" rel="noopener" style="color:var(--text3)">${esc(siteUrl)}</a></div>
+                <div style="font-size:.78rem;color:var(--text3);margin-top:-5px;">商城原址：<a href="${siteUrl}" target="_blank" rel="noopener" style="color:var(--text3)">${esc(siteUrl)}</a></div>
             </div>
         </div>
         <div class="header-badge">🔒 自动发货 · 安全可靠</div>
