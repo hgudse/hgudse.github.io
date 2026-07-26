@@ -350,7 +350,7 @@ function main() {
 
     const siteUrl = meta.siteUrl || 'https://hltx.eu.cc';
     const siteName = SITE_TITLE;
-    const GITHUB_PAGES_URL = 'https://hgudse.github.io/oue';
+    const GITHUB_PAGES_URL = 'https://gv666.github.io';
 
     // 确保输出目录存在
     if (!fs.existsSync(DIST_DIR)) fs.mkdirSync(DIST_DIR, { recursive: true });
