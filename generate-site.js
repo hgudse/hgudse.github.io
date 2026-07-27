@@ -24,8 +24,13 @@ function fixImg(url, base) {
     return url;
 }
 
-// ── SEO 配置（从 seo.json 读取）──
-const SEO = loadJSON('seo.json') || {};
+// ── SEO 配置（从根目录 seo.json 读取）──
+function loadRootJSON(name) {
+    const fp = path.join(__dirname, name);
+    if (!fs.existsSync(fp)) return null;
+    return JSON.parse(fs.readFileSync(fp, 'utf8'));
+}
+const SEO = loadRootJSON('seo.json') || {};
 const SEO_KEYWORDS = SEO.keywords || '';
 const SEO_DESC = SEO.description || '';
 const SITE_TITLE = SEO.title || '精选账号商城';
@@ -368,9 +373,9 @@ function main() {
 
     if (!products.length) { console.error('❌ 没有商品数据'); process.exit(1); }
 
-    const siteUrl = meta.siteUrl || 'https://hltx.eu.cc';
+    const siteUrl = meta.siteUrl || process.env.SITE_URL;
     const siteName = SITE_TITLE;
-    const GITHUB_PAGES_URL = 'https://gv666.github.io';
+    const GITHUB_PAGES_URL = process.env.GITHUB_PAGES_URL;
 
     // 确保输出目录存在
     if (!fs.existsSync(DIST_DIR)) fs.mkdirSync(DIST_DIR, { recursive: true });
